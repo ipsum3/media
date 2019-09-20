@@ -1,0 +1,26 @@
+{
+    "name": "ipsum3/media",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "B1nj",
+            "email": "postmaster@b1nj.fr"
+        }
+    ],
+    "require": {
+        "bkwld/croppa": "dev-master@dev"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Ipsum\\Media\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ipsum\\Media\\MediaServiceProvider"
+            ]
+        }
+    }
+}
