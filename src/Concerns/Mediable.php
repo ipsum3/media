@@ -25,15 +25,26 @@ trait Mediable
         });
 
         static::deleting(function ($objet) {
-            $objet->medias()->detach();
+            $objet->medias()->update(['publication_id' => null, 'publication_type' => null]);
         });
 
     }
 
 
+
+
+    /*
+     * Relations
+     */
+
     public function medias()
     {
-        return $this->morphMany(Media::class, 'publication');
+        return $this->morphMany(Media::class, 'publication')->orderBy('order');
+    }
+
+    public function images()
+    {
+        return $this->medias()->images();
     }
 
     public function illustration()
