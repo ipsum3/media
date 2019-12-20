@@ -3,14 +3,14 @@
 namespace Ipsum\Media\app\Models;
 
 
+use Ipsum\Admin\Concerns\Htmlable;
 use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Media\Concerns\Sortable;
 
 class Media extends BaseModel
 {
-    use Sortable;
+    use Sortable, Htmlable;
 
-    // TODO check champs html
 
     protected $table = 'medias';
 
@@ -18,7 +18,8 @@ class Media extends BaseModel
 
 
     protected $appends = ['is_image', 'crop_path', 'tag_alt'];
-    
+
+    protected $htmlable = ['description'];
 
     const TYPE_IMAGE = 'image';
 
