@@ -35,7 +35,7 @@ class MediaController extends AdminController
     {
         $query = Media::query();
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $query->where(function($query) use ($request) {
                 foreach (['titre', 'description', 'url'] as $colonne) {
                     $query->orWhere($colonne, 'like', '%'.$request->get('search').'%');
