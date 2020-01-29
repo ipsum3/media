@@ -22,6 +22,7 @@ class Media extends BaseModel
     protected $htmlable = ['description'];
 
     const TYPE_IMAGE = 'image';
+    const TYPE_DOCUMENT = 'document';
 
 
 
@@ -39,6 +40,11 @@ class Media extends BaseModel
     public function scopeImages($query)
     {
         return $query->where('type', self::TYPE_IMAGE);
+    }
+
+    public function scopeDocuments($query)
+    {
+        return $query->where('type', self::TYPE_DOCUMENT);
     }
     
     
@@ -70,6 +76,11 @@ class Media extends BaseModel
     public function getIsImageAttribute()
     {
         return $this->type == self::TYPE_IMAGE;
+    }
+
+    public function getIsDocumentAttribute()
+    {
+        return $this->type == self::TYPE_DOCUMENT;
     }
 
     public function getTagAltAttribute()
