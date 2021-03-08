@@ -49,6 +49,6 @@ trait Mediable
 
     public function illustration()
     {
-        return $this->morphOne(Media::class, 'publication')->whereNull('groupe')->images()->orderBy('order');
+        return $this->morphOne(Media::class, 'publication')->images()->orderBy('order')->orderBy('groupe');
     }
 }
