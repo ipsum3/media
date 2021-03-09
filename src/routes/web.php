@@ -21,11 +21,11 @@ Route::group(
             "as" => "admin.media.new",
             "uses" => "MediaController@new",
         ));
-        Route::get("publication/{type}", array(
+        Route::get("publication/{type?}", array(
             "as" => "admin.media.publication",
             "uses" => "MediaController@publication",
         ));
-        Route::post('changeOrder/{type}', array(
+        Route::post('changeOrder/{type?}', array(
             'as'     => 'admin.media.changeOrder',
             'uses'   => 'MediaController@changeOrder'
         ));

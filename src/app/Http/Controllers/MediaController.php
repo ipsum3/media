@@ -62,8 +62,14 @@ class MediaController extends AdminController
         return $views;
     }
 
-    public function publication(Request $request, $publication_type)
+    public function publication(Request $request, $publication_type = null)
     {
+        // Problème avec $publication_type en parametre de route sur serveur laragon
+        // On garde une rétrocompatibilité
+        if ($publication_type === null) {
+            $publication_type = $request->get('publication_type');
+        }
+
         $medias = Media::where('publication_type', $publication_type)
             ->where('publication_id', $request->filled('publication_id') ? $request->get('publication_id') : null)
             ->where('groupe', $request->filled('groupe') ? $request->get('groupe') : null)
