@@ -25,7 +25,13 @@ trait Mediable
         });
 
         static::deleting(function ($objet) {
-            $objet->medias()->update(['publication_id' => null, 'publication_type' => null]);
+            if ($objet->mediable_delete) {
+                foreach ($objet->medias as $media) {
+                    $media->delete();
+                }
+            } else {
+                $objet->medias()->update(['publication_id' => null, 'publication_type' => null]);
+            }
         });
 
     }

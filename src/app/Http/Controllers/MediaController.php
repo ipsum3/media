@@ -210,10 +210,6 @@ class MediaController extends AdminController
     {
         $media->delete();
 
-        if (File::exists($media->path)) {
-            \Croppa::delete($media->cropPath);
-        }
-
         Alert::warning("L'enregistrement a bien été supprimé")->flash();
         return back();
 

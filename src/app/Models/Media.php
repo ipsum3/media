@@ -25,6 +25,18 @@ class Media extends BaseModel
     const TYPE_DOCUMENT = 'document';
 
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($objet) {
+            if (\File::exists(public_path($objet->path))) {
+                \Croppa::delete($objet->cropPath);
+            }
+        });
+
+    }
+
 
     /*
      * Relations
@@ -46,9 +58,9 @@ class Media extends BaseModel
     {
         return $query->where('type', self::TYPE_DOCUMENT);
     }
-    
-    
-    
+
+
+
     /*
      * Accessors & Mutators
      */
