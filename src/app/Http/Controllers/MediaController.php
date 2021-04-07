@@ -70,10 +70,24 @@ class MediaController extends AdminController
             $publication_type = $request->get('publication_type');
         }
 
-        $medias = Media::where('publication_type', $publication_type)
-            ->where('publication_id', $request->filled('publication_id') ? $request->get('publication_id') : null)
+        $query = Media::where('publication_type', $publication_type)
+            ->where('publication_id', $request->get('publication_id'))
             ->where('groupe', $request->filled('groupe') ? $request->get('groupe') : null)
-            ->orderBy('order')->get();
+            ->orderBy('order');
+
+        if (!$request->filled('publication_id')) {
+            $media_ids = [];
+            if (Session::has('media.publications')) {
+                foreach (Session::get('media.publications') as $media) {
+                    if ($media['publication_type'] == $publication_type) {
+                        $media_ids[] = $media['media_id'];
+                    }
+                }
+            }
+            $query->whereIn('id', $media_ids);
+        }
+
+        $medias = $query->get();
 
         $views = '';
         foreach ($medias as $media) {
@@ -153,7 +167,7 @@ class MediaController extends AdminController
             $media->save();
 
             if ($request->filled('publication_type') and !$request->filled('publication_id')) {
-                // Cas des médias qui ne sont pas encore associé à une pulbication
+                // Cas des médias qui ne sont pas encore associé à une publication
                 // Cas de l'upload avant la création de la publication
                 $mediaPublications[] = array(
                     'publication_type' => $request->get('publication_type'),

@@ -16,9 +16,11 @@ trait Mediable
             // Association des medias uploadés avant enregistrement de la publication
             if (Session::has('media.publications')) {
                 foreach (Session::get('media.publications') as $medias) {
-                    $media = Media::findOrFail($medias['media_id']);
-                    $media->publication_id = $objet->id;
-                    $media->save();
+                    $media = Media::find($medias['media_id']);
+                    if ($media) {
+                        $media->publication_id = $objet->id;
+                        $media->save();
+                    }
                 }
                 Session::forget('media.publications');
             }
