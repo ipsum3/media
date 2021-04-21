@@ -55,6 +55,11 @@ trait Mediable
         return $this->medias()->images();
     }
 
+    public function documents()
+    {
+        return $this->medias()->documents();
+    }
+
     public function illustration()
     {
         return $this->morphOne(Media::class, 'publication')->images()->orderBy('order')->orderBy('groupe');
