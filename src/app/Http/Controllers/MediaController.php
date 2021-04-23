@@ -125,6 +125,7 @@ class MediaController extends AdminController
             abort(422, $error);
         }
 
+        $path = $request->filled('path') ? $request->get('path').'/' : config('ipsum.media.path');
         $repertoire = ($request->filled('repertoire') and in_array($request->get('repertoire'), config('ipsum.media.repertoires'))) ? $request->get('repertoire').'/' : '';
 
         $file = $request->file('media');
@@ -139,7 +140,7 @@ class MediaController extends AdminController
 
             // Renomme si fichier existe déja
             $count = 1;
-            while (File::exists(config('ipsum.media.path').$repertoire.$filename)) {
+            while (File::exists($path.$repertoire.$filename)) {
                 $filename = $basename.'('.$count++.').'.$extension;
             }
 
@@ -153,7 +154,7 @@ class MediaController extends AdminController
             }
 
             // Enregistrement du fichier
-            $file->move(config('ipsum.media.path').$repertoire, $filename);
+            $file->move($path.$repertoire, $filename);
 
             // Enregistrement en bdd
             $media = new Media;

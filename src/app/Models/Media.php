@@ -67,17 +67,17 @@ class Media extends BaseModel
 
     public function getPathAttribute()
     {
-        return 'uploads/'.($this->repertoire ? $this->repertoire.'/'.$this->fichier : $this->fichier);
+        return config('ipsum.media.path').($this->repertoire ? $this->repertoire.'/'.$this->fichier : $this->fichier);
     }
 
     public function getCropPathAttribute()
     {
-        return 'uploads/crops/'.($this->repertoire ? $this->repertoire.'/'.$this->fichier : $this->fichier);
+        return config('ipsum.media.path').'crops/'.($this->repertoire ? $this->repertoire.'/'.$this->fichier : $this->fichier);
     }
 
     public function getCropUrlAttribute()
     {
-        return 'uploads/crops/'.($this->repertoire ? $this->repertoire.'/'.$this->fichier : $this->fichier);
+        return config('ipsum.media.path').'crops/'.($this->repertoire ? $this->repertoire.'/'.$this->fichier : $this->fichier);
     }
 
     public function getIconeAttribute()
