@@ -14,7 +14,7 @@ class Media extends BaseModel
 
     protected $table = 'medias';
 
-    protected $fillable = ['titre', 'alt', 'description', 'repertoire', 'fichier', 'url', 'publication_id', 'publication_type', 'groupe', 'order'];
+    protected $fillable = ['type', 'titre', 'alt', 'description', 'repertoire', 'fichier', 'url', 'publication_id', 'publication_type', 'groupe', 'order'];
 
 
     protected $appends = ['is_image', 'crop_path', 'tag_alt'];
