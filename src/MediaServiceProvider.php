@@ -70,6 +70,26 @@ class MediaServiceProvider extends ServiceProvider
             __DIR__.'/config/ipsum/media.php', 'ipsum.media'
         );
 
+        $this->mergeConfigFrom(
+            __DIR__.'/config/croppa.php', 'croppa'
+        );
+
+        app()->config["filesystems.disks.uploads"] = [
+            'driver' => 'local',
+            'root' => public_path('uploads'),
+            'url' => env('APP_URL').'/uploads',
+            'visibility' => 'public',
+            'throw' => false,
+        ];
+
+        app()->config["filesystems.disks.crops"] = [
+            'driver' => 'local',
+            'root' => public_path('uploads/crops'),
+            'url' => env('APP_URL').'/uploads/crops',
+            'visibility' => 'public',
+            'throw' => false,
+        ];
+
         // register the artisan commands
         $this->commands($this->commands);
     }
