@@ -8,7 +8,7 @@
         }
     ],
     "require": {
-        "bkwld/croppa": "dev-master@dev"
+        "bkwld/croppa": "^4.11.1"
     },
     "minimum-stability": "stable",
     "autoload": {
