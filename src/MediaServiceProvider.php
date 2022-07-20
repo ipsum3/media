@@ -38,11 +38,7 @@ class MediaServiceProvider extends ServiceProvider
 
     public function loadViews()
     {
-        $this->loadViewsFrom([
-            resource_path('views/ipsum/media'),
-            __DIR__.'/ressources/views',
-        ], 'IpsumMedia');
-
+        $this->loadViewsFrom(__DIR__.'/ressources/views', 'IpsumMedia');
     }
 
 
