@@ -7,6 +7,37 @@ use Ipsum\Admin\Concerns\Htmlable;
 use Ipsum\Core\app\Models\BaseModel;
 use Ipsum\Media\Concerns\Sortable;
 
+/**
+ * Ipsum\Media\app\Models\Media
+ *
+ * @property int $id
+ * @property string $type
+ * @property string $titre
+ * @property string|null $alt
+ * @property string|null $description
+ * @property string|null $repertoire
+ * @property string $fichier
+ * @property string|null $url
+ * @property int|null $publication_id
+ * @property string|null $publication_type
+ * @property string|null $groupe
+ * @property int|null $order
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $crop_path
+ * @property-read mixed $crop_url
+ * @property-read mixed $icone
+ * @property-read mixed $is_document
+ * @property-read mixed $is_image
+ * @property-read mixed $path
+ * @property-read mixed $tag_alt
+ * @method static \Illuminate\Database\Eloquent\Builder|Media documents()
+ * @method static \Illuminate\Database\Eloquent\Builder|Media images()
+ * @method static \Illuminate\Database\Eloquent\Builder|Media newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Media newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Media query()
+ * @mixin \Eloquent
+ */
 class Media extends BaseModel
 {
     use Sortable, Htmlable;
