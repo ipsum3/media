@@ -90,7 +90,7 @@ class Media extends BaseModel
         return $query->where('type', self::TYPE_DOCUMENT);
     }
     
-    public function scopeGroupe($query, string $groupe)
+    public function scopeGroupe($query, ?string $groupe)
     {
         return $query->where('groupe', $groupe);
     }
