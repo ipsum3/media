@@ -5,6 +5,7 @@ namespace Ipsum\Media\app\Models;
 
 use Ipsum\Admin\Concerns\Htmlable;
 use Ipsum\Core\app\Models\BaseModel;
+use Ipsum\Core\Concerns\Translatable;
 use Ipsum\Media\Concerns\Sortable;
 
 /**
@@ -31,6 +32,8 @@ use Ipsum\Media\Concerns\Sortable;
  * @property-read mixed $is_image
  * @property-read mixed $path
  * @property-read mixed $tag_alt
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Ipsum\Core\app\Models\Translate[] $translates
+ * @property-read int|null $translates_count
  * @method static \Illuminate\Database\Eloquent\Builder|Media documents()
  * @method static \Illuminate\Database\Eloquent\Builder|Media images()
  * @method static \Illuminate\Database\Eloquent\Builder|Media newModelQuery()
@@ -40,7 +43,7 @@ use Ipsum\Media\Concerns\Sortable;
  */
 class Media extends BaseModel
 {
-    use Sortable, Htmlable;
+    use Sortable, Htmlable, Translatable;
 
 
     protected $table = 'medias';
@@ -51,6 +54,8 @@ class Media extends BaseModel
     protected $appends = ['is_image', 'crop_path', 'tag_alt'];
 
     protected $htmlable = ['description'];
+
+    protected $translatable_attributes = ['titre', 'alt', 'description'];
 
     const TYPE_IMAGE = 'image';
     const TYPE_DOCUMENT = 'document';

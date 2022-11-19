@@ -5,7 +5,7 @@
 
     <h1 class="main-title">Média</h1>
 
-    {{ Aire::open()->route('admin.media.update', $media->id)->bind($media)->formRequest(\Ipsum\Media\app\Http\Requests\StoreMedia::class) }}
+    {{ Aire::open()->route('admin.media.update', [$media->id, request()->route('locale')])->bind($media)->formRequest(\Ipsum\Media\app\Http\Requests\StoreMedia::class) }}
     <div class="row">
         <div class="col-md-6">
             <div class="box">
@@ -24,6 +24,17 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Détail du média</h3>
+                    <div class="btn-toolbar">
+                        @if ($media->exists and count(config('ipsum.translate.locales')) > 1)
+                            <ul class="nav nav-tabs" role="tablist">
+                                @foreach(config('ipsum.translate.locales') as $locale)
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ (request()->route('locale') == $locale['nom'] or (request()->route('locale') === null and config('ipsum.translate.default_locale') == $locale['nom'])) ? 'active' : '' }}" href="{{ route('admin.media.edit', [$media, $locale['nom']]) }}" aria-selected="true">{{ $locale['intitule'] }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
                 </div>
                 <div class="box-body">
                     {{ Aire::input('titre', 'Titre*') }}

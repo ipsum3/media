@@ -45,11 +45,11 @@ Route::group(
             "as" => "admin.media.getDestroy",
             "uses" => "MediaController@destroy",
         ));
-        Route::put("{media}", array(
+        Route::put("{media}/{locale?}", array(
             "as" => "admin.media.update",
             "uses" => "MediaController@update",
         ));
-        Route::get("{media}/edit", array(
+        Route::get("{media}/edit/{locale?}", array(
             "as" => "admin.media.edit",
             "uses" => "MediaController@edit",
         ));
