@@ -12,12 +12,13 @@
                 <div class="box-header">
                     <div class="box-toolbar"><a href="{{ asset($media->path) }}">Voir le média</a></div>
                 </div>
-                @if ($media->isImage)
-                    <img class="img-fluid" src="{{ Croppa::url($media->cropPath, 700) }}" alt="{{ $media->tagAlt }}" />
-                @else
-                    <span class="media-icone {{ $media->icone }} pb-4">{{ $media->type }}</span>
-                @endif
-                <div></div>
+                <div class="box-body text-center">
+                    @if ($media->isImage)
+                        <img class="img-fluid" src="{{ Croppa::url($media->cropPath, 700) }}" alt="{{ $media->tagAlt }}" />
+                    @else
+                        <span class="media-icone {{ $media->icone }} pb-4">{{ $media->type }}</span>
+                    @endif
+                </div>
             </div>
         </div>
         <div class="col-md-6">
