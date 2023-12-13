@@ -13,6 +13,7 @@ use File;
 use Str;
 use Session;
 use View;
+use Storage;
 
 class MediaController extends AdminController
 {
@@ -198,6 +199,50 @@ class MediaController extends AdminController
     public function edit(Media $media)
     {
         return view('IpsumMedia::media.update', compact('media'));
+    }
+
+    public function crop(Media $media)
+    {
+        return view('IpsumMedia::media.crop', compact('media'));
+    }
+
+    public function crop_update(Request $request, Media $media)
+    {
+        // Récupérer le fichier envoyé via AJAX
+        $imageData = explode( ',', $request->input('image'));
+
+        // Convertir les données base64 en fichier temporaire
+        $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData[1]));
+
+        // Générer un nouveau nom de fichier unique
+        $ext = pathinfo($media->fichier, PATHINFO_EXTENSION);
+        if($request->input('extension')){
+            $ext = $request->input('extension');
+        }
+        $filename = pathinfo(Str::slug($media->titre), PATHINFO_FILENAME);
+        $count = 1;
+        $newFileName = $filename.uniqid().'('.$count.').'.$ext;
+        while (File::exists(config('ipsum.media.path').$media->repertoire.'/'.$newFileName)) {
+            $newFileName = $filename.uniqid().'('.$count++.').'.$ext;
+        }
+
+        // Sauvegarder le fichier dans le répertoire approprié
+        $path = config('ipsum.media.path').$media->repertoire.'/'.$newFileName;
+        file_put_contents($path, $image);
+
+        // Suppression de l'ancien fichier
+        if (File::exists(config('ipsum.media.path').$media->repertoire.'/'.$media->fichier)) {
+            File::delete(config('ipsum.media.path').$media->repertoire.'/'.$media->fichier);
+        }
+
+        // Mettre à jour le nom du fichier dans $media->fichier
+        $media->fichier = $newFileName;
+        $media->save();
+
+
+
+        Alert::success("L'enregistrement a bien été modifié")->flash();
+        return response()->json(['success' => true, 'message' => "L'enregistrement a bien été modifié"]);
     }
 
     public function update(StoreMedia $request, Media $media)

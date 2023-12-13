@@ -10,7 +10,18 @@
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header">
-                    <div class="box-toolbar"><a href="{{ asset($media->path) }}">Voir le média</a></div>
+                    <div class="box-toolbar">
+                        <a class="btn btn-outline-secondary mr-2" href="{{ asset($media->path) }}" target="_blank">
+                            <i class="fas fa-eye"></i>
+                            Voir le média
+                        </a>
+                        @if( $media->type == "image" )
+                        <a class="btn btn-outline-secondary" href="{{route('admin.media.crop', [$media->id, request()->route('locale')])}}">
+                            <i class="fas fa-edit"></i>
+                            Modifier l'image
+                        </a>
+                        @endif
+                    </div>
                 </div>
                 <div class="box-body text-center">
                     @if ($media->isImage)

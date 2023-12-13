@@ -53,6 +53,14 @@ Route::group(
             "as" => "admin.media.edit",
             "uses" => "MediaController@edit",
         ));
+        Route::get("{media}/crop/{locale?}", array(
+            "as" => "admin.media.crop",
+            "uses" => "MediaController@crop",
+        ));
+        Route::post("{media}/crop_update/{locale?}", array(
+            "as" => "admin.media.crop_update",
+            "uses" => "MediaController@crop_update",
+        ));
 
     }
 );
