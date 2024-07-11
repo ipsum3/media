@@ -9,6 +9,7 @@ class MediaServiceProvider extends ServiceProvider
 
     protected $commands = [
         \Ipsum\Media\app\Console\Commands\Install::class,
+        \Ipsum\Media\app\Console\Commands\CheckMedia::class,
     ];
 
     /**

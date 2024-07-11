@@ -32,9 +32,10 @@ use Ipsum\Media\Concerns\Sortable;
  * @property-read mixed $is_image
  * @property-read mixed $path
  * @property-read mixed $tag_alt
- * @property-read \Illuminate\Database\Eloquent\Collection|\Ipsum\Core\app\Models\Translate[] $translates
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Ipsum\Core\app\Models\Translate> $translates
  * @property-read int|null $translates_count
  * @method static \Illuminate\Database\Eloquent\Builder|Media documents()
+ * @method static \Illuminate\Database\Eloquent\Builder|Media groupe(?string $groupe)
  * @method static \Illuminate\Database\Eloquent\Builder|Media images()
  * @method static \Illuminate\Database\Eloquent\Builder|Media newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Media newQuery()
