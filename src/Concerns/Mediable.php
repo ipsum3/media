@@ -3,6 +3,7 @@
 namespace  Ipsum\Media\Concerns;
 
 use Ipsum\Media\app\Models\Media;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Session;
 
 trait Mediable
@@ -27,6 +28,10 @@ trait Mediable
         });
 
         static::deleting(function ($objet) {
+            if (in_array(SoftDeletes::class, class_uses_recursive($objet)) && !$objet->isForceDeleting()) {
+                return;
+            }
+
             if ($objet->mediable_delete) {
                 foreach ($objet->medias as $media) {
                     $media->delete();
