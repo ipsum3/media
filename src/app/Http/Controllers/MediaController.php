@@ -89,12 +89,20 @@ class MediaController extends AdminController
         }
 
         $medias = $query->get();
+        $toolbar = $request->get('toolbar');
 
         $views = '';
         foreach ($medias as $media) {
             $views .= View::make(
                 'IpsumMedia::media._media',
-                ['media' => $media, 'sortable' => true]
+                [
+                    'media' => $media,
+                    'sortable' => isset($toolbar['sortable']) ? $toolbar['sortable'] : true,
+                    'editable' => isset($toolbar['editable']) ? $toolbar['editable'] : true,
+                    'title' => isset($toolbar['title']) ? $toolbar['title'] : true,
+                    'link' => isset($toolbar['link']) ? $toolbar['link'] : false,
+                    'pad' => isset($toolbar['pad']) ? $toolbar['pad'] : false
+                ]
             )->render();
         }
 
