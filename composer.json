@@ -9,7 +9,7 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "bkwld/croppa": "dev-master@dev"
+        "bkwld/croppa": "^8.0.1"
     },
     "minimum-stability": "stable",
     "autoload": {
